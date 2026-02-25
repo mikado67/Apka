@@ -1,4 +1,5 @@
 ﻿Imports System.Drawing.Drawing2D
+Imports System.IO
 Imports System.Linq
 Imports System.Net.Http
 Imports System.Text
@@ -7,6 +8,8 @@ Imports System.Threading
 Imports System.Xml
 
 Public Class Form1
+
+
 
     ' ═══════════════════════════════════════════════════════════════
     ' KOLORY / STAŁE
@@ -43,6 +46,9 @@ Public Class Form1
         .CookieContainer = New Net.CookieContainer()
     }
     Private httpClient As HttpClient
+
+    Private csvConfig As DataTable
+
 
     ' ═══════════════════════════════════════════════════════════════
     ' MODEL OPRAWY
@@ -93,6 +99,9 @@ Public Class Form1
     ' LOAD / SHOWN
     ' ═══════════════════════════════════════════════════════════════
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        btnPobierzKonfig.Text = T("csv.btn_pobierz")
+
         Me.FormBorderStyle = FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
 
@@ -104,7 +113,7 @@ Public Class Form1
         tabMain.Padding = New Point(15, 5)
         tabMain.BackColor = TLO
 
-        For Each tp As TabPage In {tabStan, tabTS, tabStanOpraw, tabMigaj}
+        For Each tp As TabPage In {tabStan, tabTS, tabStanOpraw, tabProgramowanie}
             tp.UseVisualStyleBackColor = False
             tp.BackColor = TLO
         Next
@@ -193,7 +202,7 @@ Public Class Form1
         btnDisconnect.Text = T("stan.btn_rozlacz")
         btnExit.Text = T("stan.btn_zamknij")
         lblOdświeżanie.Text = T("status.odswiezanie")
-
+        btnPobierzKonfig.Text = T("csv.btn_pobierz")
         LblSutc.Text = T("stan.sutc")
         LblAwar.Text = T("stan.awar")
         LblPraw.Text = T("stan.praw")
@@ -235,7 +244,7 @@ Public Class Form1
         tabStan.Text = T("tab.stan")
         tabTS.Text = T("tab.ts")
         tabStanOpraw.Text = T("tab.stanopraw")
-        tabMigaj.Text = T("tab.migaj")
+        tabProgramowanie.Text = T("tab.programowanie")
         tabMain.Invalidate()
 
         OtwórzToolStripMenuItem.Text = T("tray.otworz")
@@ -1862,5 +1871,49 @@ Public Class Form1
 
         Await PolaczZSerwerem()
     End Sub
+
+    ' 2. Przycisk CSV
+    Private Sub btnPobierzKonfig_Click(sender As Object, e As EventArgs) Handles btnPobierzKonfig.Click, btnPobierzKonfig.Click
+        Dim ofd As New OpenFileDialog With {
+        .Filter = "CSV|*.csv",
+        .Title = "Wczytaj oprawy.csv"
+    }
+        If ofd.ShowDialog = DialogResult.OK Then
+            Try
+                csvConfig = ParseOprawyCsv(ofd.FileName)
+                MsgBox($"Wczytano {csvConfig.Rows.Count} opraw z pliku")
+            Catch ex As Exception
+                MsgBox("BŁĄD CSV: " & ex.Message)
+            End Try
+        End If
+    End Sub
+
+
+    ' 3. Parser CSV - PEŁNY
+    Private Function ParseOprawyCsv(path As String) As DataTable
+        Dim dt As New DataTable("Oprawy")
+        Dim lines() As String = IO.File.ReadAllLines(path)
+
+        If lines.Length < 2 Then Throw New Exception("CSV pusty")
+
+        ' Nagłówek
+        Dim headers() As String = Split(lines(0), ";")
+        For Each h In headers
+            dt.Columns.Add(Trim(h), GetType(String))
+        Next
+
+        ' Dane
+        For i As Integer = 1 To lines.Length - 1
+            Dim cells() As String = Split(lines(i), ";")
+            Dim row As DataRow = dt.NewRow()
+            For j As Integer = 0 To Math.Min(headers.Length - 1, cells.Length - 1)
+                row(j) = Trim(cells(j))
+            Next
+            dt.Rows.Add(row)
+        Next
+
+        Return dt
+    End Function
+
 
 End Class
