@@ -19,9 +19,9 @@ Partial Class Form1
     Private Sub InitializeComponent()
         components = New ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As DataGridViewCellStyle = New DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As DataGridViewCellStyle = New DataGridViewCellStyle()
         tmrRefresh = New Timer(components)
         trayIcon = New NotifyIcon(components)
         trayMenu = New ContextMenuStrip(components)
@@ -110,15 +110,15 @@ Partial Class Form1
         lstHistoria = New ListBox()
         tabStanOpraw = New TabPage()
         pnlHeader = New Panel()
+        btnPobierzKonfig = New Button()
         btnOdswiezOprawy = New Button()
         lblLicznikOpraw = New Label()
         pnlOdswiezStatus = New Panel()
         lblOdswiezOpis = New Label()
         dgvOprawy = New DataGridView()
-        tabMigaj = New TabPage()
+        tabProgramowanie = New TabPage()
         tabMain = New TabControl()
         pnlSummary = New Panel()
-        btnPobierzKonfig = New Button()
         trayMenu.SuspendLayout()
         tabStan.SuspendLayout()
         tabTS.SuspendLayout()
@@ -1007,6 +1007,15 @@ Partial Class Form1
         pnlHeader.Size = New Size(1302, 46)
         pnlHeader.TabIndex = 0
         ' 
+        ' btnPobierzKonfig
+        ' 
+        btnPobierzKonfig.Location = New Point(1087, 3)
+        btnPobierzKonfig.Name = "btnPobierzKonfig"
+        btnPobierzKonfig.Size = New Size(199, 40)
+        btnPobierzKonfig.TabIndex = 4
+        btnPobierzKonfig.Text = "Wgraj konfigurację z pliku"
+        btnPobierzKonfig.UseVisualStyleBackColor = True
+        ' 
         ' btnOdswiezOprawy
         ' 
         btnOdswiezOprawy.BackColor = Color.FromArgb(CByte(0), CByte(122), CByte(204))
@@ -1056,30 +1065,30 @@ Partial Class Form1
         ' 
         dgvOprawy.AllowUserToAddRows = False
         dgvOprawy.AllowUserToDeleteRows = False
-        DataGridViewCellStyle1.BackColor = Color.FromArgb(CByte(37), CByte(37), CByte(38))
-        dgvOprawy.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.BackColor = Color.FromArgb(CByte(37), CByte(37), CByte(38))
+        dgvOprawy.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
         dgvOprawy.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
         dgvOprawy.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
         dgvOprawy.BackgroundColor = Color.FromArgb(CByte(30), CByte(30), CByte(30))
         dgvOprawy.BorderStyle = BorderStyle.None
         dgvOprawy.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal
-        DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(48))
-        DataGridViewCellStyle2.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold)
-        DataGridViewCellStyle2.ForeColor = Color.FromArgb(CByte(0), CByte(122), CByte(204))
-        DataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = DataGridViewTriState.True
-        dgvOprawy.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(48))
+        DataGridViewCellStyle5.Font = New Font("Segoe UI", 9.0F, FontStyle.Bold)
+        DataGridViewCellStyle5.ForeColor = Color.FromArgb(CByte(0), CByte(122), CByte(204))
+        DataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = DataGridViewTriState.True
+        dgvOprawy.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
         dgvOprawy.ColumnHeadersHeight = 32
-        DataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(48))
-        DataGridViewCellStyle3.Font = New Font("Consolas", 9.5F)
-        DataGridViewCellStyle3.ForeColor = Color.FromArgb(CByte(212), CByte(212), CByte(212))
-        DataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(CByte(0), CByte(122), CByte(204))
-        DataGridViewCellStyle3.SelectionForeColor = Color.White
-        DataGridViewCellStyle3.WrapMode = DataGridViewTriState.True
-        dgvOprawy.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(48))
+        DataGridViewCellStyle6.Font = New Font("Consolas", 9.5F)
+        DataGridViewCellStyle6.ForeColor = Color.FromArgb(CByte(212), CByte(212), CByte(212))
+        DataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(CByte(0), CByte(122), CByte(204))
+        DataGridViewCellStyle6.SelectionForeColor = Color.White
+        DataGridViewCellStyle6.WrapMode = DataGridViewTriState.True
+        dgvOprawy.DefaultCellStyle = DataGridViewCellStyle6
         dgvOprawy.EnableHeadersVisualStyles = False
         dgvOprawy.GridColor = Color.FromArgb(CByte(63), CByte(63), CByte(70))
         dgvOprawy.Location = New Point(0, 46)
@@ -1091,22 +1100,22 @@ Partial Class Form1
         dgvOprawy.Size = New Size(1308, 820)
         dgvOprawy.TabIndex = 1
         ' 
-        ' tabMigaj
+        ' tabProgramowanie
         ' 
-        tabMigaj.Location = New Point(4, 24)
-        tabMigaj.Name = "tabMigaj"
-        tabMigaj.Padding = New Padding(3)
-        tabMigaj.Size = New Size(1308, 866)
-        tabMigaj.TabIndex = 2
-        tabMigaj.Text = "Miganie LED"
-        tabMigaj.UseVisualStyleBackColor = True
+        tabProgramowanie.Location = New Point(4, 24)
+        tabProgramowanie.Name = "tabProgramowanie"
+        tabProgramowanie.Padding = New Padding(3)
+        tabProgramowanie.Size = New Size(1308, 866)
+        tabProgramowanie.TabIndex = 2
+        tabProgramowanie.Text = "Programowanie"
+        tabProgramowanie.UseVisualStyleBackColor = True
         ' 
         ' tabMain
         ' 
         tabMain.Controls.Add(tabStan)
         tabMain.Controls.Add(tabTS)
         tabMain.Controls.Add(tabStanOpraw)
-        tabMain.Controls.Add(tabMigaj)
+        tabMain.Controls.Add(tabProgramowanie)
         tabMain.Dock = DockStyle.Left
         tabMain.Location = New Point(0, 0)
         tabMain.Multiline = True
@@ -1122,15 +1131,6 @@ Partial Class Form1
         pnlSummary.Name = "pnlSummary"
         pnlSummary.Size = New Size(1308, 36)
         pnlSummary.TabIndex = 0
-        ' 
-        ' btnPobierzKonfig
-        ' 
-        btnPobierzKonfig.Location = New Point(1088, 12)
-        btnPobierzKonfig.Name = "btnPobierzKonfig"
-        btnPobierzKonfig.Size = New Size(199, 23)
-        btnPobierzKonfig.TabIndex = 4
-        btnPobierzKonfig.Text = "Wgraj konfigurację z pliku"
-        btnPobierzKonfig.UseVisualStyleBackColor = True
         ' 
         ' Form1
         ' 
@@ -1246,7 +1246,7 @@ Partial Class Form1
     Friend WithEvents btnCzyscHistorie As Button
     Friend WithEvents lstHistoria As ListBox
     Friend WithEvents tabStanOpraw As TabPage
-    Friend WithEvents tabMigaj As TabPage
+    Friend WithEvents tabProgramowanie As TabPage
     ' Deklaracje:
     Friend WithEvents btnOdswiezOprawy As Button
     Friend WithEvents lblLicznikOpraw As Label
